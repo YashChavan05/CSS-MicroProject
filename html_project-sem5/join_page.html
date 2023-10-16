@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Join Member</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <style>
+        form{
+            margin-left: 390px;
+            margin-right: 390px;
+            font-size: 18px;
+            font-family: Calibri;
+        }
+        input{
+            width: 100%;
+            padding: 8px 15px;
+        }
+        select{
+            width: 100%;
+            padding: 8px 15px;
+            font-size: 14px;
+        }
+        button{
+            width: 586px;
+            margin: 1px;
+            padding: 10px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-left: 390px;
+            border: none;
+            color: white;
+        }
+        .start{
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <header style="cursor: pointer;">
+        <div class="logo-image">
+            <img src = "triple_tree_f.png" width="80px" height="80px" onclick="window.location.href='start_main.html';">
+        </div>
+        <hr>
+    </header>
+    <div class="start" style="font-family: Calibri;">
+        <h1>Join</h1>
+    </div>
+    <p style="margin-left: 400px; font-family: Calibri;">All fields are required unless marked optional.</p>
+    <form method="post" name="f1">
+        <b>First name</b><br>
+        <input type="text" name="fn"><br><br>
+        <b>Last name</b><br>
+        <input type="text" name="ln"><br><br>
+        
+        <b>Phone</b><br>
+        <div style="display: flex;">
+            <div>
+                <select name="code" onchange="coun()">
+                    <option value="" disabled selected>--Country Code--</option>
+                    <option value="+61">+61 Australia</option>
+                    <option value="+39">+39 Italy</option>
+                    <option value="+91">+91 India</option>
+                    <option value="+254">+254 Kenya</option>
+                    <option value="+974">+974 Qatar</option>
+                    <option value="+7">+7 Russian Federation</option>
+                    <option value="+1">+1 United States of America</option>          
+                </select>
+            </div>
+            <div style="width: 100%;">
+                <input type="text" name="phone"><br><br>
+            </div>
+        </div>
+        <b>Email</b><br>
+        <input type="text" name="email" onblur="checkemail()"><br><br>
+        <b>Country/Region</b><br>
+        <input type="label" name="country" disabled value="----Country----"><br><br>
+        <b>Address</b><br>
+        <input type="text" name="add1"><br><br>
+        <b>Address 2</b>(optional)<br>
+        <input type="text" name="add2"><br><br>
+
+        <b>Password</b><br>
+        <input type="password" name="pass"><br><br>
+        <div style="display: flex;">
+            <div>
+                <ul>
+                    <li>Must be between 8 and 32 characters</li>
+                    <li>Contain one lowercase letter</li>
+                </ul>
+            </div>
+            <div>
+                <ul>
+                    <li>Contain one uppercase letter</li>
+                    <li>One number (0-9) or one special character</li>
+                </ul>
+            </div>
+        </div>
+        <b>Confirm Password</b><br>
+        <input type="text" name="con_pass" onblur="confirm_password()"><br><br>
+    </form>
+
+        <button onclick="submit()" style="background-color: rgb(3, 3, 124);">Join For Free</button>
+        <br><br><br>
+<!-- onclick="window.location.href='joined_page.html';" -->
+    <script>
+        function coun(){   //automatically country is selected through country_code
+            with(document.forms.f1){
+                var c_code = code.value;
+                var c = country.value;
+                if(c_code == "+61"){
+                    country.value = "Australia"
+                }
+                else if(c_code == "+39"){
+                    country.value = "Italy";
+                }
+                else if(c_code == "+91"){
+                    country.value = "India";
+                }
+                else if(c_code == "+254"){
+                    country.value = "Kenya";
+                }
+                else if(c_code == "+974"){
+                    country.value = "Qatar";
+                }
+                else if(c_code == "+7"){
+                    country.value = "Russian Federation";
+                }
+                else if(c_code == "+1"){
+                    country.value = "United States of America";
+                }
+            }
+        }
+        function password(){ //incomplete (1), (4{half})
+            with(document.forms.f1){
+                var pw = pass.value;
+                if(pw!=""){
+                    if(pw.length>7 && pw.length<32){
+                        for(i=0; i<pw.length; i++){
+                            if(pw.charAt(i)>=0 && pw.charAt(i)<=9)
+                            {
+                                //gsd;
+                            }
+                        }
+                    }
+                    else{
+                        alert("Invalid password");
+                    }
+                }
+            }
+        }
+        function confirm_password(){
+            with(document.forms.f1){
+                var pw = pass.value;
+                var c_pass = con_pass.value;
+                if(c_pass!=""){
+                    if(c_pass!=pw){
+                        alert("Password doesn't match");
+                        con_pass.value="";
+                        pass.value="";
+                    }
+                }
+            }
+        }
+        function submit(){
+            with(document.forms.f1){
+                var name = fn.value;
+                var last_name = ln.value;
+                var con_code = code.value;
+                var p = phone.value;
+                var mail = email.value;
+                var ctry = country.value;
+                var address1 = add1.value;
+                var address2 = add2.value;
+                var password = pass.value;
+
+                if(name!="" && last_name!="" && con_code!="" && p!="" && mail!="" && ctry!="" && address1!="" && password!=""){
+                    alert("First Name: " +name+ "\nLast name: " +last_name+ "\nPhone number: " +con_code+ " " +p+ "\nEmail: " +mail+ "\nCountry: " +ctry+ "\nAddress: " +address1);
+                }
+                else{
+                    alert("Any field should not be empty");
+                }
+            }
+        }
+        function checkemail(){
+            with(document.forms.f1){
+                var mail = email.value;
+                first = mail.indexOf("@");
+                second = mail.lastIndexOf("@");
+                if(mail!=""){
+                    if(first>0 && second>0){
+                        if(first!=second){
+                            alert("Only one @ sign should be there");
+                            email.value = "";
+                        }
+                    }
+                    else{
+                        alert("Email must contain @ symbol");
+                        email.value = "";
+                    }
+                }
+                else{
+                    alert("Email field should not be empty");
+                }
+            }
+        }
+    </script>
+</body>
+</html>
